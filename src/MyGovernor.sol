@@ -23,7 +23,7 @@ contract MyGovernor is
 {
     constructor(IVotes _token, TimelockController _timelock)
         Governor("MyGovernor")
-        GovernorSettings(7200, /* 1 day */ 50400, /* 1 week */ 0)
+        GovernorSettings(1, /* 1 block */ 50400, /* 1 week */ 0)
         GovernorVotes(_token)
         GovernorVotesQuorumFraction(4)
         GovernorTimelockControl(_timelock)
@@ -92,7 +92,6 @@ contract MyGovernor is
         return super.supportsInterface(interfaceId);
     }
 
-    // Add the missing _execute function here
     function _execute(
         uint256 proposalId,
         address[] memory targets,
@@ -100,7 +99,6 @@ contract MyGovernor is
         bytes[] memory calldatas,
         bytes32 descriptionHash
     ) internal override(Governor, GovernorTimelockControl) {
-        // Add your implementation here
         super._execute(proposalId, targets, values, calldatas, descriptionHash);
     }
 }
